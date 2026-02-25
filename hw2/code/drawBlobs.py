@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from skimage.color import rgb2gray
+from pathlib import Path
+import os
 
 # DRAWBLOBS overlays the image with blobs as circles
 #   DRAWBLOBS(IM, BLOBS, NMAX) overalys IM converted to a grayscale
@@ -18,8 +20,10 @@ from skimage.color import rgb2gray
 #   University of Virginia
 #   Instructor: Zezhou Cheng
 #
-def drawBlobs(im, blobs, nmax=None):
-    
+def drawBlobs(im, blobs, imageName, nmax=None):
+    OUT_DIR = Path("../output")
+    OUT_DIR.mkdir(exist_ok=True)
+
     if nmax is None:
         nmax = blobs.shape[0]
     nmax = min(nmax, blobs.shape[0])
@@ -40,5 +44,8 @@ def drawBlobs(im, blobs, nmax=None):
         plt.plot(blobs[order[i], 0] + r*np.cos(theta),
                  blobs[order[i], 1] + r*np.sin(theta),
                  'r-', linewidth=2)
-
+    
+    base = os.path.splitext(imageName)[0]
+    newName = base + '_with_blobs'
+    plt.savefig(OUT_DIR / newName, dpi=300, bbox_inches="tight")
     plt.show()

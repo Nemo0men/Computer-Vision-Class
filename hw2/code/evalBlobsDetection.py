@@ -14,14 +14,15 @@ from drawBlobs import drawBlobs
 #   University of Massachusetts, Amherst
 #   Instructor: Subhransu Maji
 
-imageName = 'butterfly.jpg'
-numBlobsToDraw = 500
-imName = imageName.split('.')[0]
+imageNames = ['butterfly.jpg', 'einstein.jpg', 'fishes.jpg', 'sunflowers.jpg']
+for imageName in imageNames:
+    numBlobsToDraw = 500
+    imName = imageName.split('.')[0]
 
-datadir = os.path.join('..', 'data', 'blobs')
-im = imread(os.path.join(datadir, imageName))
+    datadir = os.path.join('..', 'data', 'blobs')
+    im = imread(os.path.join(datadir, imageName))
 
-blobs = detectBlobs(im)  # dummy placeholder
+    blobs = detectBlobs(im)  # dummy placeholder
 
-drawBlobs(im, blobs, numBlobsToDraw)
+    drawBlobs(im, blobs, imageName, numBlobsToDraw)
 
